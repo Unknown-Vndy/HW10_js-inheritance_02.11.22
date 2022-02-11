@@ -105,7 +105,7 @@ class FreightTransport extends Vehicle{
    }
 
    set capacity(weight) {
-      if (typeof weight !== 'number' && typeof value !== NaN) {
+      if (typeof weight !== 'number' && typeof weight !== NaN) {
          throw new TypeError('capacity should be number type');
       }
       if (weight < 0) {
