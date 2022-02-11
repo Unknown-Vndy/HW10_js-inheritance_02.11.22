@@ -4,7 +4,7 @@ class Vehicle{
    constructor(brand, model, manufactureDate, dimensions) {
       this.brand = brand;
       this.model = model;
-      this.manufactureDate = new Date(manufactureDate);
+      this.manufactureDate = manufactureDate;
       // ([this.length, this.width, this.height] = dimensions);
       this.dimensions = dimensions;
    }
@@ -16,13 +16,14 @@ class Vehicle{
       if (value > new Date()) {
          throw new RangeError('inccorect date, future')
       }
+         
       this._manufactureDate = value;
    }
 
    get manufactureDate() {
-      return this._manufactureDate;
+      return this.manufactureDate;
    }
-
+   
    set dimensions(arr) {
       for (let i = 0; i < arr.length; i++) {
          if (typeof arr[i] !== 'number') {
@@ -59,6 +60,9 @@ class PassengerTransport extends Vehicle{
       if (typeof value !== 'number') {
          throw new TypeError('inccorect data dype');
       }
+      if (!Number.isInteger(value)) {
+         throw new RangeError('passenger limit should be integer');
+      }
       if (value < 1) {
          throw new RangeError('passenger Limit should be > 0');
       }
@@ -71,6 +75,9 @@ class PassengerTransport extends Vehicle{
    set passengerCount(value) {
       if (typeof value !== 'number') {
          throw new TypeError('inccorect data dype');
+      }
+      if (!Number.isInteger(value)) {
+         throw new RangeError('passenger counter should be integer');
       }
       if (value < 0) {
          throw new RangeError('passenger counter should be >= 0');
@@ -120,7 +127,7 @@ class FreightTransport extends Vehicle{
 
 let carBMW;
 try {
-   carBMW = new Vehicle('bmw', '7series', [2021, 12, 10], [1, 1, 2.5]);   
+   carBMW = new Vehicle('bmw', '7series', new Date(2020.5, 11, 10), [1, 1, 2.5]);   
 } catch (error) {
    console.log(error);
 }
@@ -132,7 +139,7 @@ try {
 
 let sprinter;
 try {
-   sprinter = new PassengerTransport('mersedes-benz', 'sprinter', [2019, 2, 15], [6, 2, 2.5], 20, 18);   
+   sprinter = new PassengerTransport('mersedes-benz', 'sprinter', new Date(2019, 2, 15), [6, 2, 2.5], 20, 1);   
 } catch (error) {
    console.log(error);
 }
@@ -146,7 +153,7 @@ try {
 
 let cargoTruck;
 try {
-   cargoTruck = new FreightTransport('MAN', 'van', [2018, 3, 18], [6, 2, 2.5], 3000);
+   cargoTruck = new FreightTransport('MAN', 'van', new Date(2018, 3, 18), [6, 2, 2.5], 3000);
 } catch (error) {
    console.log(error);
 }
