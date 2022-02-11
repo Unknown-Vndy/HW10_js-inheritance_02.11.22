@@ -26,8 +26,11 @@ class Vehicle{
    
    set dimensions(arr) {
       for (let i = 0; i < arr.length; i++) {
-         if (typeof arr[i] !== 'number' && typeof arr[i] !== NaN) {
+         if (typeof arr[i] !== 'number') {
             throw new TypeError('sizes should be numbers')
+         }
+         if (Number.isNaN(arr[i])) {
+            throw new RangeError('sizes should not be NaN')
          }
          if (arr[i] < 0) {
             throw new RangeError('sizes should be > 0');
@@ -57,10 +60,10 @@ class PassengerTransport extends Vehicle{
    }
 
    set passengerLimit(value) {
-      if (typeof value !== 'number' && typeof value !== NaN) {
+      if (typeof value !== 'number') {
          throw new TypeError('inccorect data dype');
       }
-      if (!Number.isInteger(value)) {
+      if (!Number.isInteger(value) && Number.isNaN(value)) {
          throw new RangeError('passenger limit should be integer');
       }
       if (value < 1) {
@@ -73,10 +76,10 @@ class PassengerTransport extends Vehicle{
    }
 
    set passengerCount(value) {
-      if (typeof value !== 'number' && typeof value !== NaN) {
+      if (typeof value !== 'number') {
          throw new TypeError('inccorect data dype');
       }
-      if (!Number.isInteger(value)) {
+      if (!Number.isInteger(value) && Number.isNaN(value)) {
          throw new RangeError('passenger counter should be integer');
       }
       if (value < 0) {
@@ -105,8 +108,11 @@ class FreightTransport extends Vehicle{
    }
 
    set capacity(weight) {
-      if (typeof weight !== 'number' && typeof weight !== NaN) {
+      if (typeof weight !== 'number') {
          throw new TypeError('capacity should be number type');
+      }
+      if (Number.isNaN(weight)) {
+         throw new RangeError('weight shout not be NaN');
       }
       if (weight < 0) {
          throw new RangeError('weight can not be negative number');
@@ -127,7 +133,8 @@ class FreightTransport extends Vehicle{
 
 let carBMW;
 try {
-   carBMW = new Vehicle('bmw', '7series', new Date(2020.5, 11, 10), [1, 1, 2.5]);   
+   // carBMW = new Vehicle('bmw', '7series', new Date(2020.5, 11, 10), [+'1s', 1, 2.5]);   
+   carBMW = new Vehicle('bmw', '7series', new Date(2020.5, 11, 10), [1, 1, 2.5]);
 } catch (error) {
    console.log(error);
 }
