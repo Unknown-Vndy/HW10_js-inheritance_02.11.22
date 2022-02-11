@@ -26,7 +26,7 @@ class Vehicle{
    
    set dimensions(arr) {
       for (let i = 0; i < arr.length; i++) {
-         if (typeof arr[i] !== 'number') {
+         if (typeof arr[i] !== 'number' && typeof arr[i] !== NaN) {
             throw new TypeError('sizes should be numbers')
          }
          if (arr[i] < 0) {
@@ -57,7 +57,7 @@ class PassengerTransport extends Vehicle{
    }
 
    set passengerLimit(value) {
-      if (typeof value !== 'number') {
+      if (typeof value !== 'number' && typeof value !== NaN) {
          throw new TypeError('inccorect data dype');
       }
       if (!Number.isInteger(value)) {
@@ -73,7 +73,7 @@ class PassengerTransport extends Vehicle{
    }
 
    set passengerCount(value) {
-      if (typeof value !== 'number') {
+      if (typeof value !== 'number' && typeof value !== NaN) {
          throw new TypeError('inccorect data dype');
       }
       if (!Number.isInteger(value)) {
@@ -105,7 +105,7 @@ class FreightTransport extends Vehicle{
    }
 
    set capacity(weight) {
-      if (typeof weight !== 'number') {
+      if (typeof weight !== 'number' && typeof value !== NaN) {
          throw new TypeError('capacity should be number type');
       }
       if (weight < 0) {
